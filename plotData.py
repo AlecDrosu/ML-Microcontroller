@@ -1,26 +1,25 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
 
-# Create a function that plots four types of values on the same scatter plot for a given excel file
-def plotData(excelFile):
-    # Read data from the excel file
-    data = pd.read_excel(excelFile)
-    time = data['Time']
-    current = data['Current']
-    voltage = data['Voltage']
-    power = data['Power']
-    # plot time against voltage, current, and power on the same scatter plot with different colors
-    plt.scatter(time, voltage, color='red', label='Voltage')
-    plt.scatter(time, current, color='blue', label='Current')
-    plt.scatter(time, power, color='green', label='Power')
+# Create a function that plots four types of values on the same scatter plot for a given csv file
+def plotData(csvFile, x, y1, y2, y3):
+    # Read the csv file
+    df = pd.read_csv(csvFile)
+    # Create a scatter plot
+    plt.scatter(df[x], df[y1], label = y1, s = 2)
+    plt.scatter(df[x], df[y2], label = y2, s = 2)
+    plt.scatter(df[x], df[y3], label = y3, s = 2)
     # Add a legend
     plt.legend()
-    # Add labels to the axes
-    plt.xlabel('Time')
-    plt.ylabel('Voltage, Current, and Power')
-    # Add a title
-    plt.title('Voltage, Current, and Power vs Time')
-    # Save the figure
-    # plt.savefig('plotData.png')
+    # add a grid to the plot with dashed lines
+    plt.grid(True, linestyle = '--')
+    # add a title, and labels to the axes
+    plt.title('Data from ' + csvFile)
+    plt.xlabel(x)
+    plt.ylabel('Data for ' + y1 + ', ' + y2 + ', and ' + y3)
     # Show the plot
     plt.show()
+
+# Call the function
+plotData('./Final data/csv_files/test9_MAX_23V_endurance_WET.csv', 'Time', 'Current', 'Voltage', 'Power')
