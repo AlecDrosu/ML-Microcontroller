@@ -14,11 +14,13 @@ def plotData(csvFile, x, y1, y2, y3):
     plt.legend()
     # add a grid to the plot with dashed lines
     plt.grid(True, linestyle = '--')
-    # add a title, and labels to the axes
-    plt.title('Data from ' + csvFile)
+    # add a title that removes the .csv from the name and the path
+    plt.title('Data from ' + csvFile.split('/')[-1][:-4])
     plt.xlabel(x)
     plt.ylabel('Data for ' + y1 + ', ' + y2 + ', and ' + y3)
-    # Show the plot
-    plt.show()
 
-# Call the function (e.g. plotData('./Final data/preprocessed_files/1.csv', 'Time', 'Current', 'Voltage', 'Power'))
+for file in os.listdir('./Final data/csv_files'):
+    if file.endswith('.csv'):
+        plotData('./Final data/csv_files/' + file, 'Time', 'Current', 'Voltage', 'Power')
+        plt.savefig('./Plots_Original_Data/' + file.split('/')[-1].split('.')[0] + '.png')
+        plt.clf()
