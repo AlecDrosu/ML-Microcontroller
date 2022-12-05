@@ -21,5 +21,4 @@ def plotData(csvFile, x, y1, y2, y3):
     # Show the plot
     plt.show()
 
-# Call the function
-plotData('./Final data/csv_files/test9_MAX_23V_endurance_WET.csv', 'Time', 'Current', 'Voltage', 'Power')
+# Call the function (e.g. plotData('./Final data/preprocessed_files/1.csv', 'Time', 'Current', 'Voltage', 'Power'))
